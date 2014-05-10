@@ -22,19 +22,18 @@ func main() {
 	amountOf := 0
 	alive := 0
 	te := time.Now()
-	var timeout = time.Second * 5
+	var timeout = time.Second * 3
 	var buffer bytes.Buffer
 
 	proxies, err := proksi.ReadFile(dir+"/proxies.txt")
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
 	}
 
 	for _, proxy := range proxies {
 		lines++
 		amountOf++
-		go proksi.Resolve(proxychan, proxy, timeout)
+		go proksi.ResolveAndWrite(proxychan, proxy, timeout, "http://google.com/")
 	}
 
 	for proxy := range proxychan {
@@ -47,13 +46,11 @@ func main() {
 		}
 
 		if lines == 0 {
-			err := proksi.WriteFile(time.Now().String()+".txt", buffer)
+			err := proksi.WriteFile("checked-proxies.txt", buffer)
 			if err != nil {
 				fmt.Println(err)
-				os.Exit(1)
 			}
 			fmt.Println("Checked", amountOf, "proxies in", time.Now().Sub(te), "and of which", alive, "responded.")
-			os.Exit(0)
 		}
 	}
 }
