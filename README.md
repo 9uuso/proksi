@@ -1,4 +1,4 @@
-proksi
+proksi [![GoDoc](https://godoc.org/github.com/9uuso/proksi?status.png)](https://godoc.org/github.com/9uuso/proksi)
 =======
 
 A very fast proxy tester
