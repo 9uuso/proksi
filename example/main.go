@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"proksi"
+	"github.com/9uuso/proksi"
 	"time"
 )
 
