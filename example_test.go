@@ -1,4 +1,4 @@
-package main
+package proksi_test
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func main() {
+func Example() {
 
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
@@ -22,7 +22,7 @@ func main() {
 	amountOf := 0
 	alive := 0
 	te := time.Now()
-	var timeout = time.Second * 3
+	var timeout = time.Millisecond * 2500
 	var buffer bytes.Buffer
 
 	proxies, err := proksi.ReadFile(dir + "/proxies.txt")
@@ -46,7 +46,7 @@ func main() {
 		}
 
 		if lines == 0 {
-			err := proksi.WriteFile("checked-proxies.txt", buffer)
+			err := proksi.WriteFile(dir+"/checked-proxies.txt", buffer)
 			if err != nil {
 				fmt.Println(err)
 			}
